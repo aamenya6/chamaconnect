@@ -77,7 +77,7 @@ export default function PublicLayout({ user, onLogout }) {
       <footer className="border-t t-border t-text">
         <div className="mx-auto max-w-6xl px-4 py-6 text-sm flex items-center gap-3">
           <span>© {new Date().getFullYear()} ChamaConnect</span>
-          <span>Transparent savings, calm UI.</span>
+          <span>A gateway to transparent savings.</span>
         </div>
       </footer>
     </div>
