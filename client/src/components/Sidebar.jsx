@@ -46,7 +46,7 @@ export default function Sidebar({ user, onLogout }) {
 
       <button
         onClick={onLogout}
-        className="mt-4 w-full flex items-center gap-3 px-3 py-2 rounded-xl border border-white/10 hover:bg-white/10 transition"
+        className="mt-4 w-full flex items-center gap-3 px-2.5 py-2 sm:px-3 rounded-xl border border-white/10 hover:bg-white/10 transition"
       >
         <LogOut size={18} />
         Logout

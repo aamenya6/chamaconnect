@@ -24,7 +24,7 @@ export default function ThemeToggle() {
   return (
     <Button
       onClick={onToggle}
-      className="interactive hover-lift focus-ring inline-flex items-center gap-2 px-3 py-2 rounded-lg border"
+      className="interactive hover-lift focus-ring inline-flex items-center gap-2 px-2.5 py-2 sm:px-3 rounded-lg border"
       style={{
         background: "var(--panel)",
         borderColor: "var(--border)",
@@ -32,7 +32,7 @@ export default function ThemeToggle() {
       aria-label={`Switch to ${label} mode`}
     >
       <Icon size={18} />
-      <span className="text-sm" style={{ color: "var(--muted)" }}>
+      <span className="text-sm t-muted hidden sm:inline" style={{ color: "var(--muted)" }}>
         {label}
       </span>
     </Button>
