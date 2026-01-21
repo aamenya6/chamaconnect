@@ -17,25 +17,40 @@ import CreateChama from "./pages/app/CreateChama";
 import JoinChama from "./pages/app/JoinChama";
 import Settings from "./pages/app/Settings";
 
+// NEW pages
+import Notifications from "./pages/app/Notifications";
+import Profile from "./pages/app/Profile";
+import Contributions from "./pages/app/Contributions";
+import Members from "./pages/app/Members";
+import Meetings from "./pages/app/Meetings";
+
+function isLoggedIn() {
+  // Spec says localStorage.getItem("token"), but your project uses cc_token.
+  // Support BOTH so nothing breaks.
+  return Boolean(localStorage.getItem("token") || getToken());
+}
+
 function ProtectedRoute({ children }) {
-  const token = getToken();
-  if (!token) return <Navigate to="/login" replace />;
+  if (!isLoggedIn()) return <Navigate to="/login" replace />;
   return children;
 }
 
 export default function App() {
   const [user, setUser] = useState(() => getStoredUser());
-  const token = useMemo(() => getToken(), []);
+
+  const token = useMemo(() => localStorage.getItem("token") || getToken(), []);
 
   useEffect(() => {
     setAuthToken(token);
   }, [token]);
 
   const onLogout = () => {
+    // Clear BOTH token styles safely
+    localStorage.removeItem("token");
     clearSession();
     setAuthToken(null);
     setUser(null);
-    window.location.href = "/";
+    window.location.href = "/login";
   };
 
   return (
@@ -53,12 +68,25 @@ export default function App() {
           </ProtectedRoute>
         }
       >
-        <Route path="/app" element={<Dashboard />} />
+        {/* Keep backwards compatibility */}
+        <Route path="/app" element={<Navigate to="/app/dashboard" replace />} />
+
+        {/* Required protected routes */}
+        <Route path="/app/dashboard" element={<Dashboard />} />
         <Route path="/app/chamas" element={<Chamas />} />
         <Route path="/app/chamas/create" element={<CreateChama />} />
         <Route path="/app/chamas/join" element={<JoinChama />} />
         <Route path="/app/chamas/:chamaId" element={<ChamaDetails />} />
+
+        {/* NEW protected routes */}
+        <Route path="/app/notifications" element={<Notifications />} />
+        <Route path="/app/profile" element={<Profile onLogout={onLogout} />} />
         <Route path="/app/settings" element={<Settings user={user} />} />
+
+        {/* NEW chama sub-routes */}
+        <Route path="/app/chamas/:chamaId/contributions" element={<Contributions />} />
+        <Route path="/app/chamas/:chamaId/members" element={<Members />} />
+        <Route path="/app/chamas/:chamaId/meetings" element={<Meetings />} />
       </Route>
 
       <Route path="*" element={<Navigate to="/" replace />} />

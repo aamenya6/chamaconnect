@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { LayoutDashboard, Users, PlusCircle, LogOut, Settings } from "lucide-react";
+import { LayoutDashboard, Users, Bell, User, Settings, LogOut, PlusCircle } from "lucide-react";
 
 const linkBase =
   "flex items-center gap-3 px-3 py-2 rounded-xl border border-white/10 hover:bg-white/10 transition";
@@ -17,12 +17,19 @@ export default function Sidebar({ user, onLogout }) {
       </div>
 
       <div className="space-y-2">
-        <NavLink to="/app" end className={({ isActive }) => `${linkBase} ${isActive ? active : ""}`}>
+        <NavLink
+          to="/app/dashboard"
+          end
+          className={({ isActive }) => `${linkBase} ${isActive ? active : ""}`}
+        >
           <LayoutDashboard size={18} />
           Dashboard
         </NavLink>
 
-        <NavLink to="/app/chamas" className={({ isActive }) => `${linkBase} ${isActive ? active : ""}`}>
+        <NavLink
+          to="/app/chamas"
+          className={({ isActive }) => `${linkBase} ${isActive ? active : ""}`}
+        >
           <Users size={18} />
           My Chamas
         </NavLink>
@@ -36,6 +43,22 @@ export default function Sidebar({ user, onLogout }) {
         </NavLink>
 
         <NavLink
+          to="/app/notifications"
+          className={({ isActive }) => `${linkBase} ${isActive ? active : ""}`}
+        >
+          <Bell size={18} />
+          Notifications
+        </NavLink>
+
+        <NavLink
+          to="/app/profile"
+          className={({ isActive }) => `${linkBase} ${isActive ? active : ""}`}
+        >
+          <User size={18} />
+          Profile
+        </NavLink>
+
+        <NavLink
           to="/app/settings"
           className={({ isActive }) => `${linkBase} ${isActive ? active : ""}`}
         >
@@ -46,7 +69,7 @@ export default function Sidebar({ user, onLogout }) {
 
       <button
         onClick={onLogout}
-        className="mt-4 w-full flex items-center gap-3 px-2.5 py-2 sm:px-3 rounded-xl border border-white/10 hover:bg-white/10 transition"
+        className="mt-4 w-full flex items-center gap-3 px-3 py-2 rounded-xl border border-white/10 hover:bg-white/10 transition"
       >
         <LogOut size={18} />
         Logout
