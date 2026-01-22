@@ -1,23 +1,31 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { api } from "../../lib/api";
 import Button from "../../components/ui/Button";
 import Card from "../../components/ui/Card";
+import { getChamaById, getChamaMembers } from "../../lib/api";
 
 export default function ChamaDetails() {
   const { chamaId } = useParams();
-  const [chama, setChama] = useState(null);
-  const [err, setErr] = useState("");
+
   const [loading, setLoading] = useState(true);
+  const [chama, setChama] = useState(null);
+  const [members, setMembers] = useState([]);
+  const [err, setErr] = useState("");
 
   useEffect(() => {
     (async () => {
+      setLoading(true);
+      setErr("");
       try {
-        const { data } = await api.get(`/chamas/${chamaId}`);
-        setChama(data.chama);
+        const [cRes, mRes] = await Promise.all([
+          getChamaById(chamaId),        // GET /api/chamas/:chamaId
+          getChamaMembers(chamaId)      // GET /api/chamas/:chamaId/members
+        ]);
+
+        setChama(cRes?.chama || null);
+        setMembers(mRes?.members || []);
       } catch (e) {
-        // If backend isn't ready, show a friendly error (but page still renders)
-        setErr(e?.response?.data?.message || "Failed to load chama (backend may not be running yet).");
+        setErr(e?.response?.data?.message || "Failed to load chama details.");
       } finally {
         setLoading(false);
       }
@@ -26,7 +34,7 @@ export default function ChamaDetails() {
 
   return (
     <div className="space-y-5">
-      {/* Sub-nav always visible */}
+      {/* Chama sub-nav */}
       <div className="flex flex-wrap gap-2">
         <Button as={Link} to={`/app/chamas/${chamaId}`} variant="secondary">
           Overview
@@ -42,20 +50,18 @@ export default function ChamaDetails() {
         </Button>
       </div>
 
-      {loading && <div className="text-white/60">Loading...</div>}
+      {loading && <div className="text-white/60">Loading chama…</div>}
+
       {err && (
         <Card>
-          <div className="text-red-300 font-medium">Heads up</div>
+          <div className="text-red-300 font-medium">Error</div>
           <div className="text-white/60 text-sm mt-1">{err}</div>
-          <div className="text-white/60 text-sm mt-3">
-            You can still explore the chama sub-pages (Contributions/Members/Meetings) because they use mock data for now.
-          </div>
         </Card>
       )}
 
       {!loading && !err && chama && (
         <>
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
+          <Card>
             <div className="flex flex-wrap items-start justify-between gap-3">
               <div>
                 <h1 className="text-2xl font-semibold">{chama.name}</h1>
@@ -63,30 +69,54 @@ export default function ChamaDetails() {
               </div>
 
               <div className="flex items-center gap-2">
-                <span className="px-3 py-1 rounded-full bg-white/10 border border-white/10 text-sm">
-                  {chama.currency}
-                </span>
-                <span className="px-3 py-1 rounded-full bg-white/10 border border-white/10 text-sm">
-                  Invite: <span className="font-semibold">{chama.inviteCode}</span>
-                </span>
+                {chama.cycle && (
+                  <span className="px-3 py-1 rounded-full bg-white/10 border border-white/10 text-sm">
+                    {chama.cycle}
+                  </span>
+                )}
+                {typeof chama.contributionAmount === "number" && (
+                  <span className="px-3 py-1 rounded-full bg-white/10 border border-white/10 text-sm">
+                    KES {chama.contributionAmount.toLocaleString()}
+                  </span>
+                )}
+                {chama.myRole && (
+                  <span className="px-3 py-1 rounded-full bg-white/10 border border-white/10 text-sm">
+                    Role: <span className="font-semibold">{chama.myRole}</span>
+                  </span>
+                )}
               </div>
             </div>
-          </div>
 
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
+            <div className="mt-4 flex flex-wrap gap-2 text-sm text-white/70">
+              <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10">
+                Members: <span className="text-white">{chama.memberCount ?? members.length}</span>
+              </span>
+              {chama.inviteCode && (
+                <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10">
+                  Invite: <span className="text-white font-semibold">{chama.inviteCode}</span>
+                </span>
+              )}
+            </div>
+          </Card>
+
+          <Card>
             <h2 className="font-semibold">Members</h2>
             <div className="mt-3 grid sm:grid-cols-2 gap-3">
-              {chama.members.map((m, idx) => (
-                <div key={idx} className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                  <div className="font-medium">{m.user?.name || "Member"}</div>
-                  <div className="text-sm text-white/60">{m.user?.email || ""}</div>
+              {members.map((m) => (
+                <div key={m.memberId || m.userId} className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                  <div className="font-medium">{m.name}</div>
+                  <div className="text-sm text-white/60">{m.email}</div>
                   <div className="mt-2 text-xs text-white/60">
                     Role: <span className="text-white">{m.role}</span>
                   </div>
                 </div>
               ))}
             </div>
-          </div>
+
+            {members.length === 0 && (
+              <div className="text-white/60 text-sm mt-2">No members found.</div>
+            )}
+          </Card>
         </>
       )}
     </div>
