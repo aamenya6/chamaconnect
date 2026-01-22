@@ -20,7 +20,7 @@ export default function Login({ onAuthed }) {
       saveSession(data);
       setAuthToken(data.token);
       onAuthed?.(data.user);
-      nav("/app");
+      nav("/app/dashboard");
     } catch (e) {
       setErr(e?.response?.data?.message || "Login failed");
     } finally {

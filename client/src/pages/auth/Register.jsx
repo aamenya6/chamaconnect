@@ -21,7 +21,7 @@ export default function Register({ onAuthed }) {
       saveSession(data);
       setAuthToken(data.token);
       onAuthed?.(data.user);
-      nav("/app");
+      nav("/app/dashboard");
     } catch (e) {
       setErr(e?.response?.data?.message || "Registration failed");
     } finally {

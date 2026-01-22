@@ -68,23 +68,22 @@ export default function App() {
           </ProtectedRoute>
         }
       >
-        {/* Keep backwards compatibility */}
         <Route path="/app" element={<Navigate to="/app/dashboard" replace />} />
 
-        {/* Required protected routes */}
         <Route path="/app/dashboard" element={<Dashboard />} />
         <Route path="/app/chamas" element={<Chamas />} />
         <Route path="/app/chamas/create" element={<CreateChama />} />
         <Route path="/app/chamas/join" element={<JoinChama />} />
         <Route path="/app/chamas/:chamaId" element={<ChamaDetails />} />
 
-        {/* NEW protected routes */}
         <Route path="/app/notifications" element={<Notifications />} />
         <Route path="/app/profile" element={<Profile onLogout={onLogout} />} />
         <Route path="/app/settings" element={<Settings user={user} />} />
 
-        {/* NEW chama sub-routes */}
-        <Route path="/app/chamas/:chamaId/contributions" element={<Contributions />} />
+        <Route
+          path="/app/chamas/:chamaId/contributions"
+          element={<Contributions />}
+        />
         <Route path="/app/chamas/:chamaId/members" element={<Members />} />
         <Route path="/app/chamas/:chamaId/meetings" element={<Meetings />} />
       </Route>
