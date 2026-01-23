@@ -67,7 +67,7 @@ export default function Meetings() {
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <h1 className="text-2xl font-semibold">Meetings</h1>
-          <p className="text-white/60 mt-1">
+          <p className="t-muted mt-1">
             Chama: <span className="text-white">{chama?.name || chamaId}</span>
           </p>
         </div>
@@ -82,7 +82,7 @@ export default function Meetings() {
         </div>
       </div>
 
-      {loading && <div className="text-white/60">Loading...</div>}
+      {loading && <div className="t-muted">Loading...</div>}
       {err && <div className="text-red-300">{err}</div>}
 
       {!loading && !err && showCreate && (
@@ -128,27 +128,27 @@ export default function Meetings() {
           <Card className="space-y-3">
             <div className="font-semibold">Upcoming</div>
             {upcoming.map((m) => (
-              <div key={m.id} className="rounded-xl border border-white/10 bg-white/5 p-4">
+              <div key={m.id} className="rounded-xl border t-border t-panel p-4">
                 <div className="font-medium">{m.title}</div>
-                <div className="text-white/60 text-sm mt-1">
+                <div className="t-muted text-sm mt-1">
                   {m.date} • {m.time} • {m.location}
                 </div>
               </div>
             ))}
-            {upcoming.length === 0 && <div className="text-white/60 text-sm">No upcoming meetings.</div>}
+            {upcoming.length === 0 && <div className="t-muted text-sm">No upcoming meetings.</div>}
           </Card>
 
           <Card className="space-y-3">
             <div className="font-semibold">Past</div>
             {past.map((m) => (
-              <div key={m.id} className="rounded-xl border border-white/10 bg-white/5 p-4">
+              <div key={m.id} className="rounded-xl border t-border t-panel p-4">
                 <div className="font-medium">{m.title}</div>
-                <div className="text-white/60 text-sm mt-1">
+                <div className="t-muted text-sm mt-1">
                   {m.date} • {m.time} • {m.location}
                 </div>
               </div>
             ))}
-            {past.length === 0 && <div className="text-white/60 text-sm">No past meetings.</div>}
+            {past.length === 0 && <div className="t-muted text-sm">No past meetings.</div>}
           </Card>
         </div>
       )}

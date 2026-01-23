@@ -227,3 +227,25 @@ body {
 .t-border {
   border-color: var(--border);
 }
+
+@layer utilities {
+  /* Theme-aware text */
+  .t-text { color: var(--text); }
+  .t-muted { color: var(--muted); }
+
+  /* Theme-aware surfaces */
+  .t-panel { background: var(--panel); }
+  .t-border { border-color: var(--border); }
+
+  /* Common "card" look */
+  .t-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+  }
+
+  /* Links/buttons hover background that works in both themes */
+  .t-hover:hover {
+    background: color-mix(in srgb, var(--panel) 70%, transparent);
+  }
+}

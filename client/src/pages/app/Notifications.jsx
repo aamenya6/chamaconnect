@@ -41,7 +41,7 @@ export default function Notifications() {
       <div className="flex items-start justify-between gap-3">
         <div>
           <h1 className="text-2xl font-semibold">Notifications</h1>
-          <p className="text-white/60 mt-1">
+          <p className="t-muted mt-1">
             You have <span className="text-white">{unreadCount}</span> unread notification(s).
           </p>
         </div>
@@ -51,7 +51,7 @@ export default function Notifications() {
         </Button>
       </div>
 
-      {loading && <div className="text-white/60">Loading...</div>}
+      {loading && <div className="t-muted">Loading...</div>}
       {err && <div className="text-red-300">{err}</div>}
 
       {!loading && !err && (
@@ -64,8 +64,8 @@ export default function Notifications() {
                     {!n.read && <span className="inline-block w-2 h-2 rounded-full bg-orange-400" />}
                     {n.title}
                   </div>
-                  <div className="text-white/60 text-sm mt-1">{n.message}</div>
-                  <div className="text-white/50 text-xs mt-2">{n.date}</div>
+                  <div className="t-muted text-sm mt-1">{n.message}</div>
+                  <div className="t-muted text-xs mt-2">{n.date}</div>
                 </div>
 
                 {!n.read && (
@@ -80,7 +80,7 @@ export default function Notifications() {
           {notifications.length === 0 && (
             <Card>
               <div className="font-medium">All caught up</div>
-              <div className="text-white/60 text-sm mt-1">No notifications available.</div>
+              <div className="t-muted text-sm mt-1">No notifications available.</div>
             </Card>
           )}
         </div>

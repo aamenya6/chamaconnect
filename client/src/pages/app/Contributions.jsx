@@ -55,7 +55,7 @@ export default function Contributions() {
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <h1 className="text-2xl font-semibold">Contributions</h1>
-          <p className="text-white/60 mt-1">
+          <p className="t-muted mt-1">
             Chama: <span className="text-white">{chama?.name || chamaId}</span>
           </p>
         </div>
@@ -70,22 +70,22 @@ export default function Contributions() {
         </div>
       </div>
 
-      {loading && <div className="text-white/60">Loading...</div>}
+      {loading && <div className="t-muted">Loading...</div>}
       {err && <div className="text-red-300">{err}</div>}
 
       {!loading && !err && (
         <>
           <div className="grid sm:grid-cols-3 gap-3">
             <Card>
-              <div className="text-white/60 text-sm">Paid</div>
+              <div className="t-muted text-sm">Paid</div>
               <div className="text-xl font-semibold mt-1">KES {totals.paid.toLocaleString()}</div>
             </Card>
             <Card>
-              <div className="text-white/60 text-sm">Pending</div>
+              <div className="t-muted text-sm">Pending</div>
               <div className="text-xl font-semibold mt-1">KES {totals.pending.toLocaleString()}</div>
             </Card>
             <Card>
-              <div className="text-white/60 text-sm">Late</div>
+              <div className="t-muted text-sm">Late</div>
               <div className="text-xl font-semibold mt-1">KES {totals.late.toLocaleString()}</div>
             </Card>
           </div>
@@ -94,7 +94,7 @@ export default function Contributions() {
             <div className="font-semibold mb-3">Recent payments</div>
 
             <table className="w-full text-sm">
-              <thead className="text-white/60">
+              <thead className="t-muted">
                 <tr className="text-left">
                   <th className="py-2 pr-4">Member</th>
                   <th className="py-2 pr-4">Amount</th>
@@ -104,7 +104,7 @@ export default function Contributions() {
               </thead>
               <tbody>
                 {rows.map((r) => (
-                  <tr key={r.id} className="border-t border-white/10">
+                  <tr key={r.id} className="border-t t-border">
                     <td className="py-3 pr-4">{r.member}</td>
                     <td className="py-3 pr-4">KES {r.amount.toLocaleString()}</td>
                     <td className="py-3 pr-4">{r.date}</td>
@@ -117,7 +117,7 @@ export default function Contributions() {
             </table>
 
             {rows.length === 0 && (
-              <div className="text-white/60 text-sm mt-2">No contributions yet.</div>
+              <div className="t-muted text-sm mt-2">No contributions yet.</div>
             )}
           </Card>
         </>

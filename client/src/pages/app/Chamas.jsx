@@ -25,10 +25,10 @@ export default function Chamas() {
       <div className="flex items-start justify-between gap-3">
         <div>
           <h1 className="text-2xl font-semibold">My Chamas</h1>
-          <p className="text-white/60 mt-1">Groups you belong to.</p>
+          <p className="t-muted mt-1">Groups you belong to.</p>
         </div>
         <div className="flex gap-2">
-          <Link to="/app/chamas/join" className="px-3 py-2 rounded-xl bg-white/10 border border-white/10 hover:bg-white/15">
+          <Link to="/app/chamas/join" className="px-3 py-2 rounded-xl t-panel border t-border hover:bg-white/15">
             Join
           </Link>
           <Link to="/app/chamas/create" className="px-3 py-2 rounded-xl bg-white text-black font-medium hover:opacity-90">
@@ -37,7 +37,7 @@ export default function Chamas() {
         </div>
       </div>
 
-      {loading && <div className="text-white/60">Loading...</div>}
+      {loading && <div className="t-muted">Loading...</div>}
       {err && <div className="text-red-300">{err}</div>}
 
       {!loading && !err && (
@@ -46,13 +46,13 @@ export default function Chamas() {
             <Link
               key={c._id}
               to={`/app/chamas/${c._id}`}
-              className="rounded-2xl border border-white/10 bg-white/5 p-4 hover:bg-white/10 transition"
+              className="rounded-2xl border t-border t-panel p-4 hover:t-panel transition"
             >
               <div className="font-semibold">{c.name}</div>
-              <div className="text-sm text-white/60 mt-1 line-clamp-2">{c.description || "No description"}</div>
-              <div className="mt-3 text-xs text-white/60 flex justify-between">
+              <div className="text-sm t-muted mt-1 line-clamp-2">{c.description || "No description"}</div>
+              <div className="mt-3 text-xs t-muted flex justify-between">
                 <span>{c.currency}</span>
-                <span className="px-2 py-1 rounded-full bg-white/10 border border-white/10">
+                <span className="px-2 py-1 rounded-full t-panel border t-border">
                   {c.inviteCode}
                 </span>
               </div>
@@ -60,9 +60,9 @@ export default function Chamas() {
           ))}
 
           {chamas.length === 0 && (
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-5 sm:col-span-2 lg:col-span-3">
+            <div className="rounded-2xl border t-border t-panel p-5 sm:col-span-2 lg:col-span-3">
               <div className="font-medium">No chamas yet</div>
-              <div className="text-white/60 text-sm mt-1">
+              <div className="t-muted text-sm mt-1">
                 Create one or join with an invite code.
               </div>
             </div>

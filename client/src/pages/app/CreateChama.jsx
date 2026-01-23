@@ -31,23 +31,23 @@ export default function CreateChama() {
     <div className="max-w-xl space-y-4">
       <h1 className="text-2xl font-semibold">Create a Chama</h1>
 
-      <form onSubmit={submit} className="rounded-2xl border border-white/10 bg-white/5 p-5 space-y-3">
+      <form onSubmit={submit} className="rounded-2xl border t-border t-panel p-5 space-y-3">
       <Card className="space-y-3">
         <Input
-          className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 outline-none focus:border-white/30"
+          className="w-full px-4 py-3 rounded-xl t-panel border t-border outline-none focus:border-white/30"
           placeholder="Chama name"
           value={form.name}
           onChange={(e) => setForm((p) => ({ ...p, name: e.target.value }))}
         />
         <Textarea
-          className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 outline-none focus:border-white/30"
+          className="w-full px-4 py-3 rounded-xl t-panel border t-border outline-none focus:border-white/30"
           placeholder="Description (optional)"
           rows={4}
           value={form.description}
           onChange={(e) => setForm((p) => ({ ...p, description: e.target.value }))}
         />
         <Input
-          className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 outline-none focus:border-white/30"
+          className="w-full px-4 py-3 rounded-xl t-panel border t-border outline-none focus:border-white/30"
           placeholder="Currency (e.g. KES)"
           value={form.currency}
           onChange={(e) => setForm((p) => ({ ...p, currency: e.target.value }))}

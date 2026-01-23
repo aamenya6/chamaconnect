@@ -10,7 +10,7 @@ function RolePill({ role }) {
     Treasurer: "bg-amber-500/15 border-amber-500/30 text-amber-200",
     Member: "bg-emerald-500/15 border-emerald-500/30 text-emerald-200",
   };
-  const cls = map[role] || "bg-white/10 border-white/15 text-white/80";
+  const cls = map[role] || "t-panel border-white/15 text-white/80";
   return <span className={`px-2 py-1 rounded-full border text-xs ${cls}`}>{role}</span>;
 }
 
@@ -44,7 +44,7 @@ export default function Members() {
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <h1 className="text-2xl font-semibold">Members</h1>
-          <p className="text-white/60 mt-1">
+          <p className="t-muted mt-1">
             Chama: <span className="text-white">{chama?.name || chamaId}</span>
           </p>
         </div>
@@ -69,7 +69,7 @@ export default function Members() {
               <div className="flex items-start justify-between gap-3">
                 <div>
                   <div className="font-semibold">{m.name}</div>
-                  <div className="text-white/60 text-sm">{m.email}</div>
+                  <div className="t-muted text-sm">{m.email}</div>
                 </div>
                 <RolePill role={m.role} />
               </div>
@@ -85,7 +85,7 @@ export default function Members() {
           {members.length === 0 && (
             <Card className="sm:col-span-2 lg:col-span-3">
               <div className="font-medium">No members yet</div>
-              <div className="text-white/60 text-sm mt-1">Invite members to grow the chama.</div>
+              <div className="t-muted text-sm mt-1">Invite members to grow the chama.</div>
             </Card>
           )}
         </div>
@@ -95,7 +95,7 @@ export default function Members() {
       {selected && (
         <Card className="space-y-3">
           <div className="font-semibold">Member actions (UI only)</div>
-          <div className="text-white/60 text-sm">
+          <div className="t-muted text-sm">
             Selected: <span className="text-white">{selected.name}</span> — {selected.role}
           </div>
 

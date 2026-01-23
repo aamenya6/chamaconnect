@@ -35,7 +35,7 @@ export default function Profile({ onLogout }) {
       <div className="flex items-start justify-between gap-3">
         <div>
           <h1 className="text-2xl font-semibold">Profile</h1>
-          <p className="text-white/60 mt-1">Your account information (mock for now).</p>
+          <p className="t-muted mt-1">Your account information (mock for now).</p>
         </div>
 
         <Button variant="danger" onClick={hardLogout}>
@@ -43,38 +43,38 @@ export default function Profile({ onLogout }) {
         </Button>
       </div>
 
-      {loading && <div className="text-white/60">Loading...</div>}
+      {loading && <div className="t-muted">Loading...</div>}
       {err && <div className="text-red-300">{err}</div>}
 
       {!loading && !err && profile && (
         <Card className="space-y-4">
           <div>
-            <div className="text-white/60 text-sm">Name</div>
+            <div className="t-muted text-sm">Name</div>
             <div className="font-semibold">{profile.name}</div>
           </div>
 
           <div>
-            <div className="text-white/60 text-sm">Email</div>
+            <div className="t-muted text-sm">Email</div>
             <div className="font-medium">{profile.email}</div>
           </div>
 
           <div className="grid sm:grid-cols-2 gap-4">
             <div>
-              <div className="text-white/60 text-sm">Phone</div>
+              <div className="t-muted text-sm">Phone</div>
               <div className="font-medium">{profile.phone}</div>
             </div>
             <div>
-              <div className="text-white/60 text-sm">Location</div>
+              <div className="t-muted text-sm">Location</div>
               <div className="font-medium">{profile.location}</div>
             </div>
           </div>
 
           <div>
-            <div className="text-white/60 text-sm">Joined</div>
+            <div className="t-muted text-sm">Joined</div>
             <div className="font-medium">{profile.joinedAt}</div>
           </div>
 
-          <div className="text-white/60 text-sm">
+          <div className="t-muted text-sm">
             Next upgrades: edit profile, avatar, security settings, and account deletion flow.
           </div>
         </Card>

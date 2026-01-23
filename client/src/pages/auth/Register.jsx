@@ -32,24 +32,24 @@ export default function Register({ onAuthed }) {
   return (
     <div className="max-w-md mx-auto">
       <h2 className="text-2xl font-semibold">Create your account</h2>
-      <p className="text-white/60 mt-1">Start a chama or join one with an invite code.</p>
+      <p className="t-muted mt-1">Start a chama or join one with an invite code.</p>
 
       <form onSubmit={submit} className="mt-6 space-y-3">
         <Input
-          className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 outline-none focus:border-white/30"
+          className="w-full px-4 py-3 rounded-xl t-panel border t-border outline-none focus:border-white/30"
           placeholder="Full name"
           value={form.name}
           onChange={(e) => setForm((p) => ({ ...p, name: e.target.value }))}
         />
         <Input
-          className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 outline-none focus:border-white/30"
+          className="w-full px-4 py-3 rounded-xl t-panel border t-border outline-none focus:border-white/30"
           placeholder="Email"
           value={form.email}
           onChange={(e) => setForm((p) => ({ ...p, email: e.target.value }))}
         />
         <Input
           type="password"
-          className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 outline-none focus:border-white/30"
+          className="w-full px-4 py-3 rounded-xl t-panel border t-border outline-none focus:border-white/30"
           placeholder="Password (min 6 chars)"
           value={form.password}
           onChange={(e) => setForm((p) => ({ ...p, password: e.target.value }))}
@@ -65,7 +65,7 @@ export default function Register({ onAuthed }) {
         </Button>
       </form>
 
-      <p className="mt-4 text-sm text-white/60">
+      <p className="mt-4 text-sm t-muted">
         Already have an account? <Link className="text-white underline" to="/login">Login</Link>
       </p>
     </div>
