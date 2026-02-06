@@ -80,34 +80,120 @@ const MOCK_CHAMAS = [
 
 const MOCK_MEMBERS_BY_CHAMA = {
   c1: [
-    { memberId: "mm1", userId: "u1", name: "Abel Nyarunda", email: "abel@example.com", role: "admin", joinedAt: "2026-01-01" },
-    { memberId: "mm2", userId: "u2", name: "Joy", email: "joy@example.com", role: "treasurer", joinedAt: "2026-01-02" },
-    { memberId: "mm3", userId: "u3", name: "Brian K.", email: "brian@example.com", role: "member", joinedAt: "2026-01-03" },
+    {
+      memberId: "mm1",
+      userId: "u1",
+      name: "Abel Nyarunda",
+      email: "abel@example.com",
+      role: "admin",
+      joinedAt: "2026-01-01",
+    },
+    {
+      memberId: "mm2",
+      userId: "u2",
+      name: "Joy",
+      email: "joy@example.com",
+      role: "treasurer",
+      joinedAt: "2026-01-02",
+    },
+    {
+      memberId: "mm3",
+      userId: "u3",
+      name: "Brian K.",
+      email: "brian@example.com",
+      role: "member",
+      joinedAt: "2026-01-03",
+    },
   ],
   c2: [
-    { memberId: "mm4", userId: "u1", name: "Abel Nyarunda", email: "abel@example.com", role: "admin", joinedAt: "2026-01-05" },
-    { memberId: "mm5", userId: "u5", name: "Kevin T.", email: "kevin@example.com", role: "treasurer", joinedAt: "2026-01-06" },
+    {
+      memberId: "mm4",
+      userId: "u1",
+      name: "Abel Nyarunda",
+      email: "abel@example.com",
+      role: "admin",
+      joinedAt: "2026-01-05",
+    },
+    {
+      memberId: "mm5",
+      userId: "u5",
+      name: "Kevin T.",
+      email: "kevin@example.com",
+      role: "treasurer",
+      joinedAt: "2026-01-06",
+    },
   ],
 };
 
 const MOCK_CONTRIBUTIONS_BY_CHAMA = {
   c1: [
-    { id: "p1", memberName: "Abel Nyarunda", memberEmail: "abel@example.com", amount: 5000, status: "paid", dueDate: null, paidAt: "2026-01-10", note: "January" },
-    { id: "p2", memberName: "Joy", memberEmail: "joy@example.com", amount: 5000, status: "paid", dueDate: null, paidAt: "2026-01-11", note: "January" },
-    { id: "p3", memberName: "Brian K.", memberEmail: "brian@example.com", amount: 5000, status: "pending", dueDate: "2026-01-15", paidAt: null, note: "Pending" },
+    {
+      id: "p1",
+      memberName: "Abel Nyarunda",
+      memberEmail: "abel@example.com",
+      amount: 5000,
+      status: "paid",
+      dueDate: null,
+      paidAt: "2026-01-10",
+      note: "January",
+    },
+    {
+      id: "p2",
+      memberName: "Joy",
+      memberEmail: "joy@example.com",
+      amount: 5000,
+      status: "paid",
+      dueDate: null,
+      paidAt: "2026-01-11",
+      note: "January",
+    },
+    {
+      id: "p3",
+      memberName: "Brian K.",
+      memberEmail: "brian@example.com",
+      amount: 5000,
+      status: "pending",
+      dueDate: "2026-01-15",
+      paidAt: null,
+      note: "Pending",
+    },
   ],
 };
 
 const MOCK_MEETINGS_BY_CHAMA = {
   c1: [
-    { _id: "mt1", title: "January Kickoff", agenda: "Plan payouts", dateTime: "2026-01-25T19:00:00.000Z", location: "Google Meet" },
-    { _id: "mt2", title: "December Review", agenda: "Review last month", dateTime: "2025-12-20T18:30:00.000Z", location: "WhatsApp Call" },
+    {
+      _id: "mt1",
+      title: "January Kickoff",
+      agenda: "Plan payouts",
+      dateTime: "2026-01-25T19:00:00.000Z",
+      location: "Google Meet",
+    },
+    {
+      _id: "mt2",
+      title: "December Review",
+      agenda: "Review last month",
+      dateTime: "2025-12-20T18:30:00.000Z",
+      location: "WhatsApp Call",
+    },
   ],
 };
 
 const MOCK_NOTIFICATIONS = [
-  { _id: "n1", type: "contribution", message: "Your January contribution is due soon.", isRead: false, createdAt: "2026-01-21T10:00:00.000Z" },
-  { _id: "n2", type: "meeting", message: "January Kickoff meeting scheduled.", isRead: true, createdAt: "2026-01-17T10:00:00.000Z" },
+  {
+    _id: "n1",
+    type: "contribution",
+    message: "Your January contribution is due soon.",
+    isRead: false,
+    createdAt: "2026-01-21T10:00:00.000Z",
+  },
+  {
+    _id: "n2",
+    type: "meeting",
+    message: "January Kickoff meeting scheduled.",
+    isRead: true,
+    createdAt: "2026-01-17T10:00:00.000Z",
+  },
 ];
 
 /* ------------------------------------------------------------------
@@ -142,7 +228,10 @@ export async function getChamaContributions(chamaId) {
     const { data } = await api.get(`/chamas/${chamaId}/contributions`);
     return data; // { contributions: [...] }
   } catch (e) {
-    if (isServerDown(e)) return Promise.resolve({ contributions: MOCK_CONTRIBUTIONS_BY_CHAMA[chamaId] || [] });
+    if (isServerDown(e))
+      return Promise.resolve({
+        contributions: MOCK_CONTRIBUTIONS_BY_CHAMA[chamaId] || [],
+      });
     throw e;
   }
 }
@@ -152,7 +241,8 @@ export async function getChamaMembers(chamaId) {
     const { data } = await api.get(`/chamas/${chamaId}/members`);
     return data; // { members: [...] }
   } catch (e) {
-    if (isServerDown(e)) return Promise.resolve({ members: MOCK_MEMBERS_BY_CHAMA[chamaId] || [] });
+    if (isServerDown(e))
+      return Promise.resolve({ members: MOCK_MEMBERS_BY_CHAMA[chamaId] || [] });
     throw e;
   }
 }
@@ -162,7 +252,10 @@ export async function getChamaMeetings(chamaId) {
     const { data } = await api.get(`/chamas/${chamaId}/meetings`);
     return data; // { meetings: [...] }
   } catch (e) {
-    if (isServerDown(e)) return Promise.resolve({ meetings: MOCK_MEETINGS_BY_CHAMA[chamaId] || [] });
+    if (isServerDown(e))
+      return Promise.resolve({
+        meetings: MOCK_MEETINGS_BY_CHAMA[chamaId] || [],
+      });
     throw e;
   }
 }
@@ -172,7 +265,8 @@ export async function getNotifications() {
     const { data } = await api.get("/notifications");
     return data; // { notifications: [...] }
   } catch (e) {
-    if (isServerDown(e)) return Promise.resolve({ notifications: MOCK_NOTIFICATIONS });
+    if (isServerDown(e))
+      return Promise.resolve({ notifications: MOCK_NOTIFICATIONS });
     throw e;
   }
 }

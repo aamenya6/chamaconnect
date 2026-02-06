@@ -22,7 +22,13 @@ export default function Login({ onAuthed }) {
       onAuthed?.(data.user);
       nav("/app/dashboard");
     } catch (e) {
-      setErr(e?.response?.data?.message || "Login failed");
+      if (!e?.response) {
+        setErr(
+          "Cannot reach the backend. Make sure the server is running on http://localhost:5000",
+        );
+      } else {
+        setErr(e.response.data?.message || "Login failed");
+      }
     } finally {
       setLoading(false);
     }
@@ -35,14 +41,16 @@ export default function Login({ onAuthed }) {
 
       <form onSubmit={submit} className="mt-6 space-y-3">
         <Input
-          className="w-full px-4 py-3 rounded-xl t-panel border t-border outline-none focus:border-white/30"
+          className="w-full px-4 py-3 rounded-xl t-panel border t-border outline-none focus:border-[color:var(--text)]
+"
           placeholder="Email"
           value={form.email}
           onChange={(e) => setForm((p) => ({ ...p, email: e.target.value }))}
         />
         <Input
           type="password"
-          className="w-full px-4 py-3 rounded-xl t-panel border t-border outline-none focus:border-white/30"
+          className="w-full px-4 py-3 rounded-xl t-panel border t-border outline-none focus:border-[color:var(--text)]
+"
           placeholder="Password"
           value={form.password}
           onChange={(e) => setForm((p) => ({ ...p, password: e.target.value }))}
